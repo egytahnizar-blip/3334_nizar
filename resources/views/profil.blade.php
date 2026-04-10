@@ -24,9 +24,9 @@
         <p class="text-purple-500 mb-6">Mahasiswa & Web Developer</p>
 
         <div class="text-left bg-purple-50 p-6 rounded-xl">
-            <p class="mb-2"><strong>Nama:</strong> [Nama Kamu]</p>
-            <p class="mb-2"><strong>NIM:</strong> [NIM Kamu]</p>
-            <p class="mb-2"><strong>Kelas:</strong> [Kelas Kamu]</p>
+            <p class="mb-2"><strong>Nama:</strong> [Egy Tahnizar Gusmi]</p>
+            <p class="mb-2"><strong>NIM:</strong> [24.12.3334]</p>
+            <p class="mb-2"><strong>Kelas:</strong> [24SI05]</p>
             <p><strong>Bio:</strong> Mahasiswa yang sedang antusias belajar framework Laravel dan mendesain antarmuka menggunakan Tailwind CSS.</p>
         </div>
     </div>
