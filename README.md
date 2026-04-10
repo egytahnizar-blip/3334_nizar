@@ -4,7 +4,7 @@ Egy Tahnizar Gusmi
 24.12.3334
 24SI05
 
-#Tugas 1
+#menuju beranda
 https://3334-nizar-main-yywgcs.free.laravel.cloud/
 
 #menuju kontak
@@ -17,7 +17,7 @@ https://3334-nizar-main-yywgcs.free.laravel.cloud/bantuan
 https://3334-nizar-main-yywgcs.free.laravel.cloud/katalog
 
 #menuju profil
-
+https://3334-nizar-main-yywgcs.free.laravel.cloud/profil
 
 
 
