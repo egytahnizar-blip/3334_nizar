@@ -30,6 +30,6 @@
             <p><strong>Bio:</strong> Mahasiswa yang sedang antusias belajar framework Laravel dan mendesain antarmuka menggunakan Tailwind CSS.</p>
         </div>
     </div>
-
+    
 </body>
 </html>
