@@ -24,5 +24,6 @@ Route::get('/katalog', function () {
 
 Route::get('/bantuan', function () {
     return view('bantuan');
+    
 });
 
