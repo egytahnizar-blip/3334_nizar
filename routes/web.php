@@ -1,45 +1,39 @@
 <?php
 
-use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\EventController;
-use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\Admin\DashboardController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/event/1', [EventController::class, 'show'])->name('events.show');
-Route::get('/checkout', [EventController::class, 'checkout'])->name('checkout');
+Route::get('/event/1', [EventController::class,'show'])->name('events.show');
+Route::get('/checkout', [EventController::class,'checkout'])->name('checkout');
 Route::get('/my-ticket', [EventController::class, 'ticket'])->name('ticket');
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
-
-Route::get('/', [DashboardController::class, 'index']);
-
-Route::get('/events', [EventController::class, 'indexAdmin'])->name('events.index');
+Route::get('/', [DashboardController::class,'index'])->name('dashboard');
+Route::get('/events', [EventController::class,'indexAdmin'])->name('events.index');
+// dan seterusnya...
 });
 
-// use Illuminate\Support\Facades\Route;
+// Rute Home (Bawaan Laravel atau buat view sendiri)
+Route::get('/', function () {
+    return view('welcome'); // Pastikan file welcome.blade.php ada
+});
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+// Rute Kontak (Dari tugas sebelumnya)
+Route::get('/kontak', function () {
+    return view('kontak');
+});
 
-// Route::get('/tentang', function () {
-//     return '<h1>Ini adalah Halaman Tentang Aplikasi Event Hub</h1>';
-// });
+// 3 Rute Baru
+Route::get('/profil', function () {
+    return view('profil');
+});
 
-// Route::get('/kontak', function () {
-//     return view('contact');
-// });
+Route::get('/katalog', function () {
+    return view('katalog');
+});
 
-// Route::get('/profil', function () {
-//     return view('profil');
-// });
-
-// Route::get('/katalog', function () {
-//     return view('katalog');
-// });
-
-// Route::get('/bantuan', function () {
-//     return view('bantuan');
-
-// });
-
+Route::get('/bantuan', function () {
+    return view('bantuan');
+});
