@@ -29,7 +29,7 @@ Route::get('/kontak', function() {
 });
 
 Route::get('/profile', function(){
-    return view('profile');
+    return view('profil');
 });
 
 Route::get('/katalog', function(){
