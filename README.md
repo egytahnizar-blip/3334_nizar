@@ -1,23 +1,25 @@
 # Eventamikom-3334
 
-Egy Tahnizar Gusmi
-24.12.3334
-24SI05
+Nama : Egy Tahnizar Gusmi
+
+Nim : 24.12.3334
+
+Kelas : 24SI05
 
 Tugas 1
-#menuju beranda
+Menuju beranda
 https://3334-nizar-main-yywgcs.free.laravel.cloud/
 
-#menuju kontak
+Menuju kontak
 https://3334-nizar-main-yywgcs.free.laravel.cloud/kontak
 
-#menuju bantuan
+Menuju bantuan
 https://3334-nizar-main-yywgcs.free.laravel.cloud/bantuan
 
-#menuju katalog
-https://3334-nizar-main-yywgcs.free.laravel.cloud/katalog
+Menuju katalog
+Mttps://3334-nizar-main-yywgcs.free.laravel.cloud/katalog
 
-#menuju profil
+Menuju profil
 https://3334-nizar-main-yywgcs.free.laravel.cloud/profil
 
 Tugas 2
