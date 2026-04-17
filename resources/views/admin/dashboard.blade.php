@@ -1,7 +1,5 @@
 @extends('layouts.admin')
 
-@section('page_title', 'Dashboard Ringkasan')
-
 @section('content')
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
         <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm">
