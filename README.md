@@ -17,7 +17,7 @@ Menuju bantuan
 https://3334-nizar-main-yywgcs.free.laravel.cloud/bantuan
 
 Menuju katalog
-ttps://3334-nizar-main-yywgcs.free.laravel.cloud/katalog
+https://3334-nizar-main-yywgcs.free.laravel.cloud/katalog
 
 Menuju profil
 https://3334-nizar-main-yywgcs.free.laravel.cloud/profil
