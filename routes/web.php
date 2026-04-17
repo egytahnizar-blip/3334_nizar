@@ -28,7 +28,7 @@ Route::get('/kontak', function() {
     return view('contact');
 });
 
-Route::get('/profile', function(){
+Route::get('/profil', function(){
     return view('profil');
 });
 
