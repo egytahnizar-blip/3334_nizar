@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
         'slug' => 'seminar-it',
         ]);
 
+        
         $category2 = \App\Models\Category::firstOrCreate([
         'name' => 'Entertaiment',
         'slug' => 'entertaiment',
