@@ -19,6 +19,20 @@ https://3334-nizar-main-yywgcs.free.laravel.cloud/katalog
 #menuju profil
 https://3334-nizar-main-yywgcs.free.laravel.cloud/profil
 
+Tugas 2
+
+Halaman Dashboard :https://3334-nizar-main-yywgcs.free.laravel.cloud/admin-dashboard.html
+
+Halaman Event : https://3334-nizar-main-yywgcs.free.laravel.cloud/admin-events.html
+
+Halaman Transaksi : https://3334-nizar-main-yywgcs.free.laravel.cloud/admin-transactions.html
+
+Halaman Beranda : https://3334-nizar-main-yywgcs.free.laravel.cloud/index.html
+
+Halaman Detail Event : https://3334-nizar-main-yywgcs.free.laravel.cloud/event-detail.html
+
+Halaman Checkout : https://3334-nizar-main-yywgcs.free.laravel.cloud/checkout.html
+
 
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
