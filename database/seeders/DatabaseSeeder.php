@@ -2,79 +2,90 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Category;
+use App\Models\Event;
+use App\Models\User;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        \App\Models\User::create([
-        'name' => 'Admin Amikom',
-        'email' => 'admin@amikom.ac.id',
-        'password' => bcrypt('password'),
-        'role' => 'admin',
+        // 1. Tambahkan User Admin
+        User::create([
+            'name' => 'Administrator',
+            'email' => 'admin@gmail.com',
+            'password' => bcrypt('password123'),
         ]);
 
-        $category = \App\Models\Category::create([
-        'name' => 'Seminar IT',
-        'slug' => 'seminar-it',
+        // 2. Tambahkan 3 Kategori
+        $cat1 = Category::create(['name' => 'Teknologi', 'slug' => 'teknologi']);
+        $cat2 = Category::create(['name' => 'Olahraga', 'slug' => 'olahraga']);
+        $cat3 = Category::create(['name' => 'Seni & Musik', 'slug' => 'seni-musik']);
+
+        // 3. Tambahkan 6 Event (masing-masing kategori punya 2 event)
+
+        // Event Kategori Teknologi
+        Event::create([
+            'category_id' => $cat1->id,
+            'title' => 'Workshop Laravel 11 for Beginner',
+            'description' => 'Belajar dasar-dasar framework Laravel terbaru.',
+            'date' => '2026-05-20 09:00:00',
+            'location' => 'Lab ICT Amikom',
+            'price' => 50000,
+            'stock' => 30,
         ]);
 
-        
-        $category2 = \App\Models\Category::firstOrCreate([
-        'name' => 'Entertaiment',
-        'slug' => 'entertaiment',
+        Event::create([
+            'category_id' => $cat1->id,
+            'title' => 'AI & Future Tech Summit',
+            'description' => 'Seminar nasional membahas masa depan AI.',
+            'date' => '2026-06-15 13:00:00',
+            'location' => 'Cinema Amikom',
+            'price' => 75000,
+            'stock' => 100,
         ]);
 
-        // 3. Insert Sampel Events
-        \App\Models\Event::create([
-        'category_id' => $category2->id,
-        'title' => 'Jazz Night 2025',
-        'description' => 'Nikmati malam yang indah dengan alunan musik jazz
-
-        yang merdu.',
-
-        'date' => '2026-05-10 19:00:00',
-        'location' => 'Amikom Baru',
-        'price' => 50000,
-        'stock' => 100,
-        'poster_path' => 'posters/event-1.png',
+        // Event Kategori Olahraga
+        Event::create([
+            'category_id' => $cat2->id,
+            'title' => 'Amikom Futsal Cup',
+            'description' => 'Turnamen futsal antar program studi.',
+            'date' => '2026-07-10 08:00:00',
+            'location' => 'Lapangan GOR Amikom',
+            'price' => 25000,
+            'stock' => 20,
         ]);
 
-        \App\Models\Event::create([
-        'category_id' => $category->id,
-        'title' => 'Hackaton - Unleash Your Inner Developer',
-        'description' => 'Ayo asah skill coding kamu dan ciptakan solusi
-
-        inovatif untuk tantangan masa depan!',
-        'date' => '2026-05-05 10:00:00',
-        'location' => 'Inkubator Amikom',
-        'price' => 50000,
-        'stock' => 100,
-        'poster_path' => 'posters/event-2.png',
+        Event::create([
+            'category_id' => $cat2->id,
+            'title' => 'E-Sport Tournament Mobile Legends',
+            'description' => 'Kompetisi MLBB tingkat universitas.',
+            'date' => '2026-07-12 10:00:00',
+            'location' => 'Basement Unit 3',
+            'price' => 35000,
+            'stock' => 64,
         ]);
 
-        \App\Models\Event::create([
-        'category_id' => $category->id,
-        'title' => 'AI & FUTURE TECH SUMMIT 2026',
-        'description' => 'Jelajahi tren terkini dalam kecerdasan buatan dan
+        // Event Kategori Seni & Musik
+        Event::create([
+            'category_id' => $cat3->id,
+            'title' => 'Gelar Budaya Nusantara',
+            'description' => 'Pertunjukan tari dan musik tradisional.',
+            'date' => '2026-08-05 19:00:00',
+            'location' => 'Ruang Aula Amikom',
+            'price' => 20000,
+            'stock' => 150,
+        ]);
 
-        teknologi masa depan bersama para ahli di bidangnya.',
-
-        'date' => '2026-05-01 13:00:00',
-        'location' => 'Cinema Unit 6',
-        'price' => 50000,
-        'stock' => 100,
-        'poster_path' => 'posters/event-3.png',
+        Event::create([
+            'category_id' => $cat3->id,
+            'title' => 'Music Fest: Indie Night',
+            'description' => 'Konser musik indie lokal Yogyakarta.',
+            'date' => '2026-08-20 20:00:00',
+            'location' => 'Parkiran Belakang Unit 2',
+            'price' => 100000,
+            'stock' => 500,
         ]);
     }
 }
