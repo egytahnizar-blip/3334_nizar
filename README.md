@@ -19,19 +19,7 @@ https://3334-nizar-main-yywgcs.free.laravel.cloud/katalog
 #menuju profil
 https://3334-nizar-main-yywgcs.free.laravel.cloud/profil
 
-Tugas 2
 
-Halaman Dashboard :https://3334-nizar-main-yywgcs.free.laravel.cloud/admin-dashboard.html
-
-Halaman Event : https://3334-nizar-main-yywgcs.free.laravel.cloud/admin-events.html
-
-Halaman Transaksi : https://3334-nizar-main-yywgcs.free.laravel.cloud/admin-transactions.html
-
-Halaman Beranda : https://3334-nizar-main-yywgcs.free.laravel.cloud/index.html
-
-Halaman Detail Event : https://3334-nizar-main-yywgcs.free.laravel.cloud/event-detail.html
-
-Halaman Checkout : https://3334-nizar-main-yywgcs.free.laravel.cloud/checkout.html
 
 
 
