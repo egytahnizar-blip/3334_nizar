@@ -112,6 +112,7 @@
                             <td class="px-8 py-6">
                                 <div class="flex gap-2">
                                     <button
+                                    
                                         class="p-2.5 bg-indigo-50 text-indigo-600 rounded-xl hover:bg-indigo-600 hover:text-white transition">
                                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
