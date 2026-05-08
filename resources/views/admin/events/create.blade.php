@@ -11,7 +11,7 @@
 <div class="bg-white rounded-[2.5rem] border border-slate-100 p-10 shadow-sm max-w-4xl">
     <form action="{{ route('admin.events.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
         @csrf
-        <div class="grid grid-cols-2 gap-6">
+<div class="grid grid-cols-2 gap-6">
             <div class="col-span-2">
                 <label class="block text-sm font-bold text-slate-700 mb-2">Judul Event</label>
                 <input type="text" name="title" class="w-full px-5 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none" required>
@@ -38,7 +38,7 @@
             </div>
             <div>
                 <label class="block text-sm font-bold text-slate-700 mb-2">Stok Tiket</label>
-                <input type="number" name="stock" class="w-full px-5 py-3 rounded-xl border border-slate-200 outline-none" required>
+<input type="number" name="stock" class="w-full px-5 py-3 rounded-xl border border-slate-200 outline-none" required>
             </div>
             <div class="col-span-2">
                 <label class="block text-sm font-bold text-slate-700 mb-2">Lokasi</label>
