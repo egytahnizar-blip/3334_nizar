@@ -30,7 +30,7 @@
                 <tr class="hover:bg-slate-50/50 transition">
                     <td class="px-8 py-6 font-bold text-slate-400">{{ $index + 1 }}</td>
                     <td class="px-8 py-6">
-                        <img src="{{ asset('storage/'.$event->poster_path) }}" class="w-16 h-20 rounded-xl object-cover shadow-sm">
+                        <img src="{{ asset('storage/posters/'.$event->poster_path) }}" class="w-16 h-20 rounded-xl object-cover shadow-sm">
                     </td>
                     <td class="px-8 py-6">
                         <p class="font-black text-slate-800">{{ $event->title }}</p>
