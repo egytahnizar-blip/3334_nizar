@@ -74,7 +74,6 @@ class PartnerController extends Controller
 
         $partner->delete();
 
-        
         return redirect()->back()->with('success', 'Partner berhasil dihapus');
     }
 }
