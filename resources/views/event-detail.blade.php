@@ -1,35 +1,10 @@
 @extends('layouts.app')
+
 @section('content')
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detail Event - AmikomEventHub</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-        }
-
-        .glass {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-        }
-    </style>
-</head>
-
-<body class="bg-slate-50 text-slate-900">
-
-
-
-    <!-- Navigation (Simplified) -->
     <nav
         class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center bg-white border-b sticky top-8 z-40 rounded-b-2xl shadow-sm">
-        <a href="index.html" class="flex items-center gap-2">
+        <a href="/" class="flex items-center gap-2">
             <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold text-lg">
                 AH</div>
             <span class="text-xl font-bold tracking-tight">AmikomEventHub</span>
@@ -46,7 +21,6 @@
     </nav>
 
     <main class="max-w-7xl mx-auto px-6 py-12 grid grid-cols-1 lg:grid-cols-3 gap-12">
-        <!-- Left: Poster -->
         <div class="lg:col-span-1">
             <div class="sticky top-32">
                 <img src="assets/concert.png" alt="Concert Poster"
@@ -66,7 +40,6 @@
             </div>
         </div>
 
-        <!-- Right: Details -->
         <div class="lg:col-span-2 space-y-12">
             <div class="space-y-4">
                 <span
@@ -125,13 +98,12 @@
                         </p>
                     </div>
                     <div>
-                        <a href="checkout.html"
+                        <a href="{{ route('checkout.create', 1) }}"
                             class="inline-block px-10 py-5 bg-white text-indigo-600 rounded-2xl font-black text-xl hover:scale-105 transition-transform shadow-xl">
                             Pesan Sekarang
                         </a>
                     </div>
                 </div>
-                <!-- Decoration -->
                 <div class="absolute -right-20 -bottom-20 w-64 h-64 bg-white opacity-10 rounded-full"></div>
                 <div class="absolute -left-10 -top-10 w-32 h-32 bg-indigo-400 opacity-20 rounded-full"></div>
             </div>
@@ -171,9 +143,4 @@
         </div>
     </footer>
 
-</body>
-
-</html>
-
 @endsection
-

@@ -43,6 +43,11 @@ Tugas 3
 Tugas 4
 https://3334-nizar-main-yywgcs.free.laravel.cloud/admin/events
 
+Tugas 8
+https://3334-nizar-main-yywgcs.free.laravel.cloud/admin/login
+Email:admin@amikom.ac.id
+pass:password
+
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
