@@ -1,16 +1,15 @@
 <?php
-namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+namespace App\Http\Controllers\Admin;
 
-class Transaction extends Model
+use App\Http\Controllers\Controller;
+use App\Models\Transaction; // Impor model yang BENAR dari folder Models
+
+class TransactionController extends Controller
 {
-    protected $fillable = [
-        'event_id', 'order_id', 'customer_name', 'customer_email', 'customer_phone', 'total_price', 'status', 'snap_token'
-    ];
-
-    public function event()
+    public function index()
     {
-        return $this->belongsTo(Event::class);
+        $transactions = Transaction::with('event')->latest()->paginate(20);
+        return view('admin.transactions.index', compact('transactions'));
     }
 }
