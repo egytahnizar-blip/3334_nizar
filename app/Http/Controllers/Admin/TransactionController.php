@@ -1,13 +1,16 @@
 <?php
-namespace App\Http\Controllers\Admin;
-use App\Http\Controllers\Controller;
-use App\Models\Transaction;
-class TransactionController extends Controller
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Transaction extends Model
 {
-    public function index()
+    protected $fillable = [
+        'event_id', 'order_id', 'customer_name', 'customer_email', 'customer_phone', 'total_price', 'status', 'snap_token'
+    ];
+
+    public function event()
     {
-        // Mengambil transaksi terbaru dengan pembatasan 20 baris/halaman
-        $transactions = Transaction::with('event')->latest()->paginate(20);
-        return view('admin.transactions.index', compact('transactions'));
+        return $this->belongsTo(Event::class);
     }
 }
