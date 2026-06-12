@@ -39,15 +39,21 @@ class CheckoutController extends Controller
         $totalPrice = $event->price + 5000; // Menambahkan biaya admin (dummy)
 
         // 4. Merekam Transaksi ke Database
-        $transaction = Transaction::create([
-            'event_id' => $event->id,
-            'order_id' => $orderId,
-            'customer_name' => $request->customer_name,
-            'customer_email' => $request->customer_email,
-            'customer_phone' => $request->customer_phone,
-            'total_price' => $totalPrice,
-            'status' => 'Pending', // Status Awal
-        ]);
+        // 4. Merekam Transaksi ke Database
+        try {
+            $transaction = Transaction::create([
+                'event_id'      => $event->id,
+                'order_id'      => $orderId,
+                'customer_name' => $request->customer_name,
+                'customer_email'=> $request->customer_email,
+                'customer_phone'=> $request->customer_phone,
+                'total_price'   => $totalPrice,
+                'status'        => 'Pending',
+            ]);
+        } catch (\Exception $e) {
+            // Jika ada error saat simpan, tampilkan errornya langsung di layar
+            return $e->getMessage();
+        }
 
         // 5. Arahkan ke rute dummy halaman sukses sementara
         // (Akan kita ubah di Pertemuan selanjutnya menuju Midtrans)

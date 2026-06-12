@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\EventController as EventAdminController;
 use App\Http\Controllers\Admin\CategoryController as CategoryAdminController;
 use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\TransactionController;
+use App\Models\Transaction; // Jangan lupa tambahkan ini untuk rute tes
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,23 @@ Route::get('/my-ticket', [EventAdminController::class, 'ticket'])->name('ticket'
 Route::get('/checkout/{event}', [App\Http\Controllers\CheckoutController::class, 'create'])->name('checkout.create');
 Route::post('/checkout/{event}', [App\Http\Controllers\CheckoutController::class, 'store'])->name('checkout.store');
 
+// 🔴 Rute Tes Database (Untuk pengecekan di cloud)
+Route::get('/tes-db', function () {
+    try {
+        $t = new Transaction();
+        $t->event_id = 1; // Pastikan event ID 1 ada di database cloud kamu
+        $t->order_id = 'TRX-TEST-' . time();
+        $t->customer_name = 'Nizar Testing';
+        $t->customer_email = 'nizar@test.com';
+        $t->customer_phone = '08123456789';
+        $t->total_price = 50000;
+        $t->status = 'pending';
+        $t->save();
+        return "Data berhasil disimpan ke database!";
+    } catch (\Exception $e) {
+        return "Error: " . $e->getMessage();
+    }
+});
 
 Route::get('/login', function () {
     return redirect()->route('admin.login');
@@ -30,31 +48,26 @@ Route::get('/login', function () {
 
 /*
 |--------------------------------------------------------------------------
-| Admin Area Routes (Grup Bertumpuk Sesuai Modul Praktikum)
+| Admin Area Routes
 |--------------------------------------------------------------------------
 */
 
 Route::prefix('admin')->name('admin.')->group(function () {
 
-    // 1. Redirect URL /admin langsung ke halaman dashboard admin
     Route::redirect('/', 'admin/dashboard');
 
-    // 2. Rute Autentikasi / Login (Bebas Akses)
     Route::get('login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('login', [AuthController::class, 'login'])->name('login.post');
     Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
-    // 3. Proteksi Lapisan Keamanan Middleware (Wajib Login)
     Route::middleware(['auth', 'admin'])->group(function () {
 
         Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-        // Resource Controllers (Event, Kategori, Partner)
         Route::resource('events', EventAdminController::class);
         Route::resource('categories', CategoryAdminController::class);
         Route::resource('partners', PartnerController::class);
 
-        // Rute Laporan Transaksi Admin
         Route::get('transactions', [TransactionController::class, 'index'])->name('transactions.index');
     });
 });
@@ -81,7 +94,6 @@ Route::get('/profil', function(){
 Route::get('/katalog', function(){
     return view('katalog');
 });
-
 
 Route::get('/bantuan', function(){
     return view('bantuan');
