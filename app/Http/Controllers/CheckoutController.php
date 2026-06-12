@@ -11,18 +11,13 @@ class CheckoutController extends Controller
 {
     public function create(Event $event)
     {
-        // Mengambil daftar kategori untuk keperluan menu footer
         $categories = \App\Models\Category::all();
         return view('checkout.create', compact('event','categories'));
     }
 
     public function store(Request $request, Event $event)
     {
-        // 🔴 PASANG CCTV DI SINI:
-        // Kode ini akan menghentikan proses sementara dan menampilkan data yang dikirim form
-        //dd('TOMBOL BERHASIL DITEKAN!', $request->all());
-
-        // 1. Validasi Input Kredensial Pelanggan
+        // 1. Validasi Input
         $request->validate([
             'customer_name' => 'required|string|max:255',
             'customer_email' => 'required|email|max:255',
@@ -34,11 +29,10 @@ class CheckoutController extends Controller
             return back()->with('error', 'Mohon maaf, tiket untuk acara ini sudah habis.');
         }
 
-        // 3. Generate Kode TRX (Unik)
+        // 3. Generate Data
         $orderId = 'TRX-' . time() . '-' . Str::random(5);
-        $totalPrice = $event->price + 5000; // Menambahkan biaya admin (dummy)
+        $totalPrice = $event->price + 5000;
 
-        // 4. Merekam Transaksi ke Database
         // 4. Merekam Transaksi ke Database
         try {
             $transaction = Transaction::create([
@@ -48,15 +42,15 @@ class CheckoutController extends Controller
                 'customer_email'=> $request->customer_email,
                 'customer_phone'=> $request->customer_phone,
                 'total_price'   => $totalPrice,
-                'status'        => 'Pending',
+                'status'        => 'pending', // Ubah ke huruf kecil sesuai blade
             ]);
-        } catch (\Exception $e) {
-            // Jika ada error saat simpan, tampilkan errornya langsung di layar
-            return $e->getMessage();
-        }
 
-        // 5. Arahkan ke rute dummy halaman sukses sementara
-        // (Akan kita ubah di Pertemuan selanjutnya menuju Midtrans)
-        return redirect('/');
+            // Jika berhasil simpan, kita arahkan ke halaman utama dengan pesan sukses
+            return redirect('/')->with('success', 'Transaksi berhasil! Order ID Anda: ' . $orderId);
+
+        } catch (\Exception $e) {
+            // Jika GAGAL, pesan error akan muncul di layar (Bukan redirect)
+            return "Terjadi kesalahan saat menyimpan transaksi: " . $e->getMessage();
+        }
     }
 }
