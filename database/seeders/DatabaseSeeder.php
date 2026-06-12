@@ -11,11 +11,12 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // 1. Tambahkan User Admin
+        // 1. Tambahkan User Admin (Sudah disesuaikan dengan instruksi gambar)
         User::create([
-            'name' => 'Administrator',
-            'email' => 'admin@gmail.com',
-            'password' => bcrypt('password123'),
+            'name' => 'Admin Amikom',
+            'email' => 'admin@amikom.ac.id',
+            'password' => bcrypt('password'),
+            'role' => 'admin',
         ]);
 
         // 2. Tambahkan 3 Kategori
