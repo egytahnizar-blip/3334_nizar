@@ -11,24 +11,27 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('transactions', function (Blueprint $table) {
-            $table->id();
-            // Menghubungkan ke tabel events
-            $table->foreignId('event_id')->constrained()->onDelete('cascade');
+        // Menambahkan pengecekan agar tidak error jika tabel sudah ada
+        if (!Schema::hasTable('transactions')) {
+            Schema::create('transactions', function (Blueprint $table) {
+                $table->id();
+                // Menghubungkan ke tabel events
+                $table->foreignId('event_id')->constrained()->onDelete('cascade');
 
-            // Informasi Pesanan
-            $table->string('order_id');
-            $table->string('customer_name');
-            $table->string('customer_email');
-            $table->string('customer_phone');
-            $table->integer('total_price');
+                // Informasi Pesanan
+                $table->string('order_id');
+                $table->string('customer_name');
+                $table->string('customer_email');
+                $table->string('customer_phone');
+                $table->integer('total_price');
 
-            // Status Transaksi
-            $table->string('status'); // Contoh: 'Pending', 'Success', 'Failed'
-            $table->string('snap_token')->nullable(); // Untuk integrasi Midtrans nanti
+                // Status Transaksi
+                $table->string('status');
+                $table->string('snap_token')->nullable();
 
-            $table->timestamps();
-        });
+                $table->timestamps();
+            });
+        }
     }
 
     /**
@@ -39,4 +42,3 @@ return new class extends Migration
         Schema::dropIfExists('transactions');
     }
 };
-
