@@ -79,6 +79,7 @@ Route::get('/katalog', function(){
     return view('katalog');
 });
 
+
 Route::get('/bantuan', function(){
     return view('bantuan');
 });

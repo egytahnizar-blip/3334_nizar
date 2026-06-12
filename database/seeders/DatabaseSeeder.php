@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('password'),
             'role' => 'admin',
         ]);
+        
 
         // 2. Tambahkan 3 Kategori
         $cat1 = Category::create(['name' => 'Teknologi', 'slug' => 'teknologi']);

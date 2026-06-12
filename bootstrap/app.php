@@ -15,6 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'admin' => \App\Http\Middleware\AdminMiddleware::class, // Sesuaikan dengan nama class middleware admin Anda
         ]);
     })
+    
     ->withExceptions(function (Exceptions $exceptions): void {
         //
     })->create();
