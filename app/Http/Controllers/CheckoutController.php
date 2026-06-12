@@ -17,16 +17,21 @@ class CheckoutController extends Controller
 
     public function store(Request $request, Event $event)
     {
-        // 1. Validasi Input
-        $request->validate([
-            'customer_name' => 'required|string|max:255',
-            'customer_email' => 'required|email|max:255',
-            'customer_phone' => 'required|string|max:20',
-        ]);
+        // 1. TANGKAP ERROR VALIDASI (Silent Failure penyebab utama)
+        try {
+            $request->validate([
+                'customer_name' => 'required|string|max:255',
+                'customer_email' => 'required|email|max:255',
+                'customer_phone' => 'required|string|max:20',
+            ]);
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            // Jika ada nama input yang tidak cocok atau kosong, tampilkan paksa!
+            dd('CCTV VALIDASI GAGAL! Ada masalah pada isian form:', $e->errors());
+        }
 
-        // 2. Cegah Check-out Jika Tiket Habis
+        // 2. TANGKAP ERROR STOK
         if ($event->stock <= 0) {
-            return back()->with('error', 'Mohon maaf, tiket untuk acara ini sudah habis.');
+            dd('CCTV STOK GAGAL! Stok tiket untuk event ini 0.');
         }
 
         // 3. Generate Data
@@ -42,15 +47,15 @@ class CheckoutController extends Controller
                 'customer_email'=> $request->customer_email,
                 'customer_phone'=> $request->customer_phone,
                 'total_price'   => $totalPrice,
-                'status'        => 'pending', // Ubah ke huruf kecil sesuai blade
+                'status'        => 'pending',
             ]);
 
-            // Jika berhasil simpan, kita arahkan ke halaman utama dengan pesan sukses
-            return redirect('/')->with('success', 'Transaksi berhasil! Order ID Anda: ' . $orderId);
+            // JIKA SEMUA BERJALAN LANCAR, LAYAR AKAN BERHENTI DAN MENAMPILKAN INI:
+            dd('CCTV SUKSES! Data berhasil masuk database:', $transaction->toArray());
 
         } catch (\Exception $e) {
-            // Jika GAGAL, pesan error akan muncul di layar (Bukan redirect)
-            return "Terjadi kesalahan saat menyimpan transaksi: " . $e->getMessage();
+            // Jika database menolak, tampilkan alasan aslinya:
+            dd('CCTV DATABASE ERROR! Gagal menyimpan:', $e->getMessage());
         }
     }
 }
