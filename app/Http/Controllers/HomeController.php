@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
+use App\Models\Event;
+use App\Models\Partner;
 
 class HomeController extends Controller
 {
-    //
-     public function index()
+    public function index()
     {
-        return view('welcome');
+        $events = Event::latest()->get();
+
+        $partners = Partner::latest()->get();
+
+        return view('welcome', compact('events', 'partners'));
     }
 }
