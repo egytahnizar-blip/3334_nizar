@@ -1,17 +1,19 @@
 <?php
 
+namespace App\Http\Controllers;
+
+use App\Models\Event;
+use App\Models\Category;
 use Illuminate\Http\Request;
-use Illuminate\Routing\Controller;
 
 class EventController extends Controller
 {
-    //
-    public function show()
+    public function show(Event $event)
     {
-        return view('event-detail');
-    }
+        // Mengambil daftar kategori untuk menu navigasi header/footer
+        $categories = Category::all();
 
-    public function checkout(){
-        return view('checkout');
+        // Membuka view event-detail dengan membawa data kategori dan data spesifik acara tersebut
+        return view('event-detail', compact('categories', 'event'));
     }
 }

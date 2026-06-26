@@ -17,11 +17,13 @@ use App\Models\Transaction; // Jangan lupa tambahkan ini untuk rute tes
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/event/1', [EventAdminController::class, 'show'])->name('events.show');
+Route::get('/events/{event}', [\App\Http\Controllers\EventController::class, 'show'])->name('events.show');
 Route::get('/checkout', [EventAdminController::class, 'checkout'])->name('checkout');
 Route::get('/my-ticket', [EventAdminController::class, 'ticket'])->name('ticket');
 Route::get('/checkout/{event}', [App\Http\Controllers\CheckoutController::class, 'create'])->name('checkout.create');
 Route::post('/checkout/{event}', [App\Http\Controllers\CheckoutController::class, 'store'])->name('checkout.store');
+Route::get('/payment/{order_id}', [\App\Http\Controllers\CheckoutController::class, 'payment'])->name('checkout.payment');
+Route::get('/success/{order_id}', [\App\Http\Controllers\CheckoutController::class, 'success'])->name('checkout.success');
 
 // 🔴 Rute Tes Database (Untuk pengecekan di cloud)
 Route::get('/tes-db', function () {
