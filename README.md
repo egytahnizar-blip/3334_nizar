@@ -54,7 +54,9 @@ https://3334-nizar-main-yywgcs.free.laravel.cloud/checkout/1
 https://3334-nizar-main-yywgcs.free.laravel.cloud/checkout/2
 
 Tugas 11
-
+https://3334-nizar-main-yywgcs.free.laravel.cloud/_event-detail.html
+https://3334-nizar-main-yywgcs.free.laravel.cloud/_checkout.html
+https://3334-nizar-main-yywgcs.free.laravel.cloud/admin/transactions
 
 drive bukti lokal berhasil:
 https://drive.google.com/drive/folders/1KjoV_2knQuT4n79OhGW7TewrtYp6NYOj?usp=drive_link
