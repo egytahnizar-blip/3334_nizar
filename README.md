@@ -32,9 +32,9 @@ Halaman Transaksi : https://3334-nizar-main-yywgcs.free.laravel.cloud/admin-tran
 
 Halaman Beranda : https://3334-nizar-main-yywgcs.free.laravel.cloud/index.html
 
-Halaman Detail Event : https://3334-nizar-main-yywgcs.free.laravel.cloud/event-detail.html
+Halaman Detail Event : https://3334-nizar-main-yywgcs.free.laravel.cloud/_event-detail.html
 
-Halaman Checkout : https://3334-nizar-main-yywgcs.free.laravel.cloud/checkout.html
+Halaman Checkout : https://3334-nizar-main-yywgcs.free.laravel.cloud/_checkout.html
 
 
 Tugas 3
