@@ -62,6 +62,8 @@ https://3334-nizar-main-yywgcs.free.laravel.cloud/events/1
 
 https://3334-nizar-main-yywgcs.free.laravel.cloud/checkout/1
 
+https://3334-nizar-main-yywgcs.free.laravel.cloud/payment/TRX-1782484147-Kfu2o
+
 https://3334-nizar-main-yywgcs.free.laravel.cloud/success/TRX-1782483573-GeL3E
 
 https://3334-nizar-main-yywgcs.free.laravel.cloud/admin/transactions
