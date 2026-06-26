@@ -1,20 +1,19 @@
-@extends('layouts.admin', ['title' => 'Tambah Event'])
-
+@extends('layouts.app')
+@section('title', 'Checkout - ' . $event->title)
 @section('content')
-<header class="mb-10">
-    <h1 class="text-3xl font-black">Tambah Event</h1>
-    <p class="text-slate-500 font-medium">Isi detail event baru dengan lengkap.</p>
-</header>
-
-<div class="bg-white rounded-[2.5rem] border border-slate-100 p-10 shadow-sm max-w-4xl">
+<main class="max-w-3xl mx-auto px-6 py-20">
+    <div class="mb-12">
+        <a href="{{ route('events.show', $event->id) }}" class="text-indigo-600 font-bold flex items-center gap-2 mb-6">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+            Kembali ke Event
+        </a>
+        <h1 class="text-4xl font-extrabold">Checkout</h1>
+        <p class="text-slate-500 mt-2">Lengkapi data Anda untuk mendapatkan tiket.</p>
+    </div>
 
     @if ($errors->any())
-        <div class="mb-8 p-5 bg-rose-50 border border-rose-200 text-rose-700 rounded-2xl font-medium">
-            <div class="flex items-center gap-2 mb-2 font-bold text-rose-800">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                Ups, ada kesalahan input:
-            </div>
-            <ul class="list-disc list-inside space-y-1">
+        <div class="mb-6 p-4 bg-rose-100 text-rose-700 rounded-xl font-bold">
+            <ul class="list-disc list-inside">
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
@@ -23,56 +22,61 @@
     @endif
 
     @if (session('error'))
-        <div class="mb-8 p-5 bg-rose-50 border border-rose-200 text-rose-800 rounded-2xl font-bold flex items-center gap-3">
-            <svg class="w-6 h-6 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-            {{ session('error') }}
+        <div class="mb-6 p-4 bg-rose-100 text-rose-700 rounded-xl font-bold border border-rose-300">
+            ⚠️ {{ session('error') }}
         </div>
     @endif
-    <form action="{{ route('admin.events.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
-        @csrf
-        <div class="grid grid-cols-2 gap-6">
-            <div class="col-span-2">
-                <label class="block text-sm font-bold text-slate-700 mb-2">Judul Event</label>
-                <input type="text" name="title" value="{{ old('title') }}" class="w-full px-5 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none" required>
+
+    <div class="grid grid-cols-1 gap-8">
+        <div class="bg-white rounded-3xl border border-slate-200 p-8 shadow-sm">
+            <h3 class="text-xl font-bold mb-6 border-b pb-4">Pesanan Anda</h3>
+            <div class="flex gap-6 items-start">
+                <img src="{{ ($event->poster_path && Storage::disk('public')->exists($event->poster_path)) ? asset('storage/' . $event->poster_path) : 'https://placehold.co/200x200' }}" alt="Event" class="w-24 h-24 rounded-2xl object-cover">
+                <div>
+                    <h4 class="font-extrabold text-lg">{{ $event->title }}</h4>
+                    <p class="text-slate-500">{{ $event->date->format('d M Y') }} • {{ $event->location }}</p>
+                    <p class="text-indigo-600 font-bold mt-2">1 x Rp {{ number_format($event->price, 0, ',', '.') }}</p>
+                </div>
             </div>
-            <div>
-                <label class="block text-sm font-bold text-slate-700 mb-2">Kategori</label>
-                <select name="category_id" class="w-full px-5 py-3 rounded-xl border border-slate-200 outline-none" required>
-                    <option value="" disabled {{ old('category_id') ? '' : 'selected' }}>Pilih Kategori</option>
-                    @foreach($categories as $category)
-                        <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div>
-                <label class="block text-sm font-bold text-slate-700 mb-2">Tanggal & Waktu</label>
-                <input type="datetime-local" name="date" value="{{ old('date') }}" class="w-full px-5 py-3 rounded-xl border border-slate-200 outline-none" required>
-            </div>
-            <div class="col-span-2">
-                <label class="block text-sm font-bold text-slate-700 mb-2">Deskripsi</label>
-                <textarea name="description" rows="4" class="w-full px-5 py-3 rounded-xl border border-slate-200 outline-none" required>{{ old('description') }}</textarea>
-            </div>
-            <div>
-                <label class="block text-sm font-bold text-slate-700 mb-2">Harga (Rp)</label>
-                <input type="number" name="price" value="{{ old('price') }}" class="w-full px-5 py-3 rounded-xl border border-slate-200 outline-none" required>
-            </div>
-            <div>
-                <label class="block text-sm font-bold text-slate-700 mb-2">Stok Tiket</label>
-                <input type="number" name="stock" value="{{ old('stock') }}" class="w-full px-5 py-3 rounded-xl border border-slate-200 outline-none" required>
-            </div>
-            <div class="col-span-2">
-                <label class="block text-sm font-bold text-slate-700 mb-2">Lokasi</label>
-                <input type="text" name="location" value="{{ old('location') }}" class="w-full px-5 py-3 rounded-xl border border-slate-200 outline-none" required>
-            </div>
-            <div class="col-span-2">
-                <label class="block text-sm font-bold text-slate-700 mb-2">Upload Poster</label>
-                <input type="file" name="poster" class="w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100" required>
+            <div class="mt-8 pt-6 border-t space-y-3">
+                <div class="flex justify-between text-slate-500">
+                    <span>Harga Tiket</span>
+                    <span>Rp {{ number_format($event->price, 0, ',', '.') }}</span>
+                </div>
+                <div class="flex justify-between text-slate-500">
+                    <span>Biaya Layanan</span>
+                    <span>Rp 5.000</span>
+                </div>
+                <div class="flex justify-between text-2xl font-black mt-4 pt-4 border-t">
+                    <span>Total Bayar</span>
+                    <span class="text-indigo-600">Rp {{ number_format($event->price + 5000, 0, ',', '.') }}</span>
+                </div>
             </div>
         </div>
-        <div class="flex justify-end gap-4 mt-8">
-            <a href="{{ route('admin.events.index') }}" class="px-6 py-3 font-bold text-slate-400">Batal</a>
-            <button type="submit" class="px-8 py-3 bg-indigo-600 text-white rounded-2xl font-bold shadow-lg shadow-indigo-100 hover:bg-indigo-700 transition">Simpan Event</button>
+
+        <div class="bg-white rounded-3xl border border-slate-200 p-8 shadow-sm">
+            <h3 class="text-xl font-bold mb-6 italic text-indigo-600 underline underline-offset-8">📦 Data Pemesan</h3>
+            <form action="{{ route('checkout.store', $event->id) }}" method="POST" class="space-y-6">
+                @csrf
+                <div>
+                    <label class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wide">Nama Lengkap</label>
+                    <input type="text" name="customer_name" placeholder="Masukkan nama sesuai identitas" class="w-full px-5 py-4 bg-white border-2 border-slate-100 rounded-2xl focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-600 outline-none transition font-medium" required value="{{ old('customer_name') }}">
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wide">Email Aktif</label>
+                        <input type="email" name="customer_email" placeholder="contoh@gmail.com" class="w-full px-5 py-4 bg-white border-2 border-slate-100 rounded-2xl focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-600 outline-none transition font-medium" required value="{{ old('customer_email') }}">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wide">No. WhatsApp</label>
+                        <input type="tel" name="customer_phone" placeholder="08xxxxxxx" class="w-full px-5 py-4 bg-white border-2 border-slate-100 rounded-2xl focus:ring-4 focus:ring-indigo-500/10 focus:border-indigo-600 outline-none transition font-medium" required value="{{ old('customer_phone') }}">
+                    </div>
+                </div>
+                <button type="submit" class="w-full py-5 bg-indigo-600 text-white rounded-2xl font-black text-xl shadow-xl shadow-indigo-200 hover:bg-indigo-700 active:scale-95 transition-all">
+                    Lanjut Pembayaran
+                </button>
+            </form>
         </div>
-    </form>
-</div>
+    </div>
+</main>
 @endsection
