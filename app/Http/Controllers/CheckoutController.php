@@ -109,13 +109,16 @@ class CheckoutController extends Controller
 
              $midtransStatus = \Midtrans\Transaction::status($order_id);
 
-             // Hanya ubah status menjadi sukses jika Midtrans mengonfirmasi pembayaran lunas
-             if (in_array($midtransStatus->transaction_status, ['capture', 'settlement'])) {
-                 if ($transaction->status !== 'success') {
-                     $transaction->update(['status' => 'success']);
-                     $transaction->event->decrement('stock');
-                 }
-             }
+            // Ambil nilai status dengan aman (mengantisipasi balasan berupa Object maupun Array)
+            $trx_status = is_array($midtransStatus) ? ($midtransStatus['transaction_status'] ?? '') : ($midtransStatus->transaction_status ?? '');
+
+            // Hanya ubah status menjadi sukses jika Midtrans mengonfirmasi pembayaran lunas
+            if (in_array($trx_status, ['capture', 'settlement'])) {
+                if ($transaction->status !== 'success') {
+                    $transaction->update(['status' => 'success']);
+                    $transaction->event->decrement('stock');
+                }
+            }
          } catch (\Exception $e) {
              // Jika error (transaksi tidak ada di Midtrans, koneksi terputus), kembalikan ke beranda
              return redirect()->route('home')->with('error', 'Transaksi tidak ditemukan atau gagal diproses oleh sistem pembayaran.');
