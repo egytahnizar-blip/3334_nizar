@@ -102,8 +102,9 @@ class CheckoutController extends Controller
          $transaction = Transaction::with('event')->where('order_id', $order_id)->firstOrFail();
 
          // Validasi status pembayaran asli dari Midtrans (Mencegah manipulasi URL)
-         \Midtrans\Config::$serverKey = config('midtrans.serverKey');
-         \Midtrans\Config::$isProduction = config('midtrans.isProduction');
+         // Ubah bagian ini di CheckoutController.php
+            \Midtrans\Config::$serverKey = config('midtrans.server_key'); // samakan dengan 'server_key' di file config
+            \Midtrans\Config::$isProduction = config('midtrans.is_production'); // samakan dengan 'is_production'
 
          try {
 

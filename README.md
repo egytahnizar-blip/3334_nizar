@@ -36,7 +36,6 @@ Halaman Detail Event : https://3334-nizar-main-yywgcs.free.laravel.cloud/_event-
 
 Halaman Checkout : https://3334-nizar-main-yywgcs.free.laravel.cloud/_checkout.html
 
-
 Tugas 3
 "Menambahkan Database Migration Seeding"
 
