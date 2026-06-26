@@ -1,48 +1,68 @@
 @extends('layouts.admin', ['title' => 'Tambah Event'])
 
-
 @section('content')
 <header class="mb-10">
     <h1 class="text-3xl font-black">Tambah Event</h1>
     <p class="text-slate-500 font-medium">Isi detail event baru dengan lengkap.</p>
 </header>
 
-
 <div class="bg-white rounded-[2.5rem] border border-slate-100 p-10 shadow-sm max-w-4xl">
+
+    @if ($errors->any())
+        <div class="mb-8 p-5 bg-rose-50 border border-rose-200 text-rose-700 rounded-2xl font-medium">
+            <div class="flex items-center gap-2 mb-2 font-bold text-rose-800">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                Ups, ada kesalahan input:
+            </div>
+            <ul class="list-disc list-inside space-y-1">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    @if (session('error'))
+        <div class="mb-8 p-5 bg-rose-50 border border-rose-200 text-rose-800 rounded-2xl font-bold flex items-center gap-3">
+            <svg class="w-6 h-6 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+            {{ session('error') }}
+        </div>
+    @endif
     <form action="{{ route('admin.events.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
         @csrf
-<div class="grid grid-cols-2 gap-6">
+        <div class="grid grid-cols-2 gap-6">
             <div class="col-span-2">
                 <label class="block text-sm font-bold text-slate-700 mb-2">Judul Event</label>
-                <input type="text" name="title" class="w-full px-5 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none" required>
+                <input type="text" name="title" value="{{ old('title') }}" class="w-full px-5 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-indigo-500 outline-none" required>
             </div>
             <div>
                 <label class="block text-sm font-bold text-slate-700 mb-2">Kategori</label>
                 <select name="category_id" class="w-full px-5 py-3 rounded-xl border border-slate-200 outline-none" required>
+                    <option value="" disabled {{ old('category_id') ? '' : 'selected' }}>Pilih Kategori</option>
                     @foreach($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                     @endforeach
                 </select>
             </div>
             <div>
                 <label class="block text-sm font-bold text-slate-700 mb-2">Tanggal & Waktu</label>
-                <input type="datetime-local" name="date" class="w-full px-5 py-3 rounded-xl border border-slate-200 outline-none" required>
+                <input type="datetime-local" name="date" value="{{ old('date') }}" class="w-full px-5 py-3 rounded-xl border border-slate-200 outline-none" required>
             </div>
             <div class="col-span-2">
                 <label class="block text-sm font-bold text-slate-700 mb-2">Deskripsi</label>
-                <textarea name="description" rows="4" class="w-full px-5 py-3 rounded-xl border border-slate-200 outline-none" required></textarea>
+                <textarea name="description" rows="4" class="w-full px-5 py-3 rounded-xl border border-slate-200 outline-none" required>{{ old('description') }}</textarea>
             </div>
             <div>
                 <label class="block text-sm font-bold text-slate-700 mb-2">Harga (Rp)</label>
-                <input type="number" name="price" class="w-full px-5 py-3 rounded-xl border border-slate-200 outline-none" required>
+                <input type="number" name="price" value="{{ old('price') }}" class="w-full px-5 py-3 rounded-xl border border-slate-200 outline-none" required>
             </div>
             <div>
                 <label class="block text-sm font-bold text-slate-700 mb-2">Stok Tiket</label>
-<input type="number" name="stock" class="w-full px-5 py-3 rounded-xl border border-slate-200 outline-none" required>
+                <input type="number" name="stock" value="{{ old('stock') }}" class="w-full px-5 py-3 rounded-xl border border-slate-200 outline-none" required>
             </div>
             <div class="col-span-2">
                 <label class="block text-sm font-bold text-slate-700 mb-2">Lokasi</label>
-                <input type="text" name="location" class="w-full px-5 py-3 rounded-xl border border-slate-200 outline-none" required>
+                <input type="text" name="location" value="{{ old('location') }}" class="w-full px-5 py-3 rounded-xl border border-slate-200 outline-none" required>
             </div>
             <div class="col-span-2">
                 <label class="block text-sm font-bold text-slate-700 mb-2">Upload Poster</label>
