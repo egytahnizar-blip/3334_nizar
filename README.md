@@ -72,6 +72,8 @@ Tugas 12
 
 https://3334-nizar-main-yywgcs.free.laravel.cloud/admin/transactions
 
+https://3334-nizar-main-yywgcs.free.laravel.cloud/admin/dashboard
+
 Tugas 13
 
 
