@@ -68,6 +68,14 @@ https://3334-nizar-main-yywgcs.free.laravel.cloud/success/TRX-1782483573-GeL3E
 
 https://3334-nizar-main-yywgcs.free.laravel.cloud/admin/transactions
 
+Tugas 12
+
+https://3334-nizar-main-yywgcs.free.laravel.cloud/admin/transactions
+
+Tugas 13
+
+
+
 
 
 
